@@ -120,7 +120,7 @@ const PlacesPage = () => {
                             <div className='flex flex-col gap-1 items-start'>
                                 <h3 className='mt-2 -mb-2'>Check out time</h3>
                                 <input type="text" placeholder='18:00' value={checkOut}
-                                    onChange={ev => checkOut(ev.target.value)} />
+                                    onChange={ev => setCheckOut(ev.target.value)} />
                             </div>
                             <div className='flex flex-col gap-1 items-start'>
                                 <h3 className='mt-2 -mb-2'>Max number of guests</h3>
