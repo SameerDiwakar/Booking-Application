@@ -8,9 +8,12 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const imageDownloader = require('image-downloader')
+const fs = require('fs')
+const multer  = require('multer')
 const port = 3000;
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'ndwnd93er932rh02'
+const path = require('path');
 
 app.use(express.json()); //body parser
 app.use(cookieParser())
@@ -93,7 +96,19 @@ app.post('/upload-by-link',async (req,res) => {
   res.json(newName)
 })
 
-
+const photosMiddleware = multer({dest:'uploads'});
+app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
+  const uploadedFiles = [];
+  for (let i = 0; i < req.files.length; i++) {
+    const { path: tempPath, originalname } = req.files[i];
+    const ext = path.extname(originalname); 
+    const newPath = tempPath + ext;
+    fs.renameSync(tempPath, newPath);
+    const newFileName = path.basename(newPath);
+    uploadedFiles.push(newFileName);
+  }
+  res.json(uploadedFiles);
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
