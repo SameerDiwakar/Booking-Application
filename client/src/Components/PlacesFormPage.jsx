@@ -1,6 +1,6 @@
 import PhotosUploader from "../PhotosUploader.jsx";
 import Perks from "../Perks.jsx";
-import {useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import AccountNav from "../AccountNav";
 import { Navigate, useParams } from "react-router-dom";
@@ -18,6 +18,30 @@ const PlacesFormPage = () => {
   const [maxGuests, setMaxGuests] = useState(1);
   // const [price, setPrice] = useState(100);
   const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    axios.get('/places/' + id)
+      .then(response => {
+        const { data } = response;
+        setTitle(data.title || "");
+        setAddress(data.address || "");
+        setAddedPhotos(data.photos || []);
+        setDescription(data.description || "");
+        setPerks(data.perks || []);
+        setExtraInfo(data.extraInfo || "");
+        setCheckIn(data.checkIn || "");
+        setCheckOut(data.checkOut || "");
+        setMaxGuests(data.maxGuests || 1);
+        // setPrice(data.price || 0); if you have a price field
+      })
+      .catch(error => {
+        console.error("Error fetching place data:", error);
+      });
+  }, [id]);
+
   function inputHeader(text) {
     return (
       <h2 className="text-2xl mt-4">{text}</h2>
@@ -36,22 +60,35 @@ const PlacesFormPage = () => {
       </>
     );
   }
-  async function addNewPlace(ev) {
-    ev.preventDefault()
-    await axios.post('/places'
-      , { title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests }
-    )
-    setRedirect(true)
-  }
 
+  async function savePlace(ev) {
+    ev.preventDefault();
+    const placeData = {
+      title, address, addedPhotos,
+      description, perks, extraInfo,
+      checkIn, checkOut, maxGuests
+    };
+    if (id) {
+      // update
+      await axios.put('/places', {
+        id, ...placeData
+      });
+      setRedirect(true);
+    } else {
+      // new place
+      await axios.post('/places', placeData);
+      setRedirect(true);
+    }
+
+  }
   if (redirect) {
     return <Navigate to={'/account/places'} />
   }
-  
+
   return (
     <div>
-      <AccountNav/>
-      <form onSubmit={addNewPlace}>
+      <AccountNav />
+      <form onSubmit={savePlace}>
         {preInput('Title', 'Title for your place')}
         <input type="text" placeholder='Title, for example "My Beautiful Place"' value={title} onChange={ev => setTitle(ev.target.value)} />
         {preInput('Address', 'Address to this Place')}
