@@ -16,7 +16,7 @@ const PlacesFormPage = () => {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [maxGuests, setMaxGuests] = useState(1);
-  // const [price, setPrice] = useState(100);
+  const [price, setPrice] = useState(100);
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const PlacesFormPage = () => {
         setCheckIn(data.checkIn || "");
         setCheckOut(data.checkOut || "");
         setMaxGuests(data.maxGuests || 1);
-        // setPrice(data.price || 0); if you have a price field
+        setPrice(data.price || 0);
       })
       .catch(error => {
         console.error("Error fetching place data:", error);
@@ -66,7 +66,7 @@ const PlacesFormPage = () => {
     const placeData = {
       title, address, addedPhotos,
       description, perks, extraInfo,
-      checkIn, checkOut, maxGuests
+      checkIn, checkOut, maxGuests,price
     };
     if (id) {
       // update
@@ -104,7 +104,7 @@ const PlacesFormPage = () => {
         {preInput('Extra Info', 'House Rules, Instrucutions etc..')}
         <textarea value={extraInfo} onChange={ev => setExtraInfo(ev.target.value)} />
         {preInput('Check in and Check out Time', 'Add Check in and Check out Time, remember to have some time window for cleaning the room between guests')}
-        <div className="grid gap-2 sm:grid-cols-3">
+        <div className="grid gap-2 grid-cols-2 md:grid-cols-4">
           <div className='flex flex-col gap-1 items-start'>
             <h3 className='mt-2 -mb-2'>Check in time</h3>
             <input type="text" placeholder='12:00' value={checkIn}
@@ -119,6 +119,11 @@ const PlacesFormPage = () => {
             <h3 className='mt-2 -mb-2'>Max number of guests</h3>
             <input type="number" placeholder='4' value={maxGuests}
               onChange={ev => setMaxGuests(ev.target.value)} />
+          </div>
+          <div>
+            <h3 className="mt-2 -mb-1">Price per night</h3>
+            <input type="number" placeholder="100" value={price}
+                   onChange={ev => setPrice(ev.target.value)}/>
           </div>
         </div>
         <button className='primary my-4'>Save</button>

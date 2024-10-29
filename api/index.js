@@ -115,13 +115,13 @@ app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
 app.post('/places',(req,res) => {
   const {token} = req.cookies;
   const {
-    title,address,addedPhotos,description,
+    title,address,addedPhotos,description,price,
     perks,extraInfo,checkIn,checkOut,maxGuests,
   } = req.body;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
     const placeDoc = await Place.create({
-      owner:userData.id,
+      owner:userData.id,price,
       title,address,photos:addedPhotos,description,
       perks,extraInfo,checkIn,checkOut,maxGuests
     });
@@ -163,8 +163,11 @@ app.put('/places', async (req,res) => {
       res.json('ok');
     }
   });
-  console.log('checkOut:', checkOut); 
-  console.log('checkIn:', checkIn); 
+});
+
+app.get('/places', async (req,res) => {
+  // mongoose.connect(process.env.MONGO_URL);
+  res.json( await Place.find() );
 });
 
 
