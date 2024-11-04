@@ -2,7 +2,6 @@ import { useState } from "react";
 import Image from "./Image.jsx";
 
 export default function PlaceGallery({ place }) {
-
     const [showAllPhotos, setShowAllPhotos] = useState(false);
 
     if (showAllPhotos) {
@@ -30,23 +29,21 @@ export default function PlaceGallery({ place }) {
 
     return (
         <div className="relative">
-            <div className="grid gap-2 grid-cols-[2fr_1fr] rounded-3xl overflow-hidden">
+            <div className="grid gap-1 grid-cols-[2fr_1fr] rounded-3xl overflow-hidden">
                 <div>
                     {place.photos?.[0] && (
                         <div>
-                            <Image onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover" src={place.photos[0]} alt="" />
+                            <Image onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover w-full h-full" src={place.photos[0]} alt="" />
                         </div>
                     )}
                 </div>
-                <div className="grid">
+                <div className="grid grid-rows-2 gap-1">
                     {place.photos?.[1] && (
-                        <Image onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover" src={place.photos[1]} alt="" />
+                        <Image onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover w-full h-full" src={place.photos[1]} alt="" />
                     )}
-                    <div className="overflow-hidden">
-                        {place.photos?.[2] && (
-                            <Image onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover relative top-2" src={place.photos[2]} alt="" />
-                        )}
-                    </div>
+                    {place.photos?.[2] && (
+                        <Image onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover w-full h-full" src={place.photos[2]} alt="" />
+                    )}
                 </div>
             </div>
             <button onClick={() => setShowAllPhotos(true)} className="flex gap-1 absolute bottom-2 right-2 py-2 px-4 bg-white rounded-2xl shadow shadow-gray-500">
