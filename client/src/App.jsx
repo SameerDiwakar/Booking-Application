@@ -13,7 +13,7 @@ import PlacePage from './Components/PlacePage'
 import BookingsPage from './Components/BookingsPage'
 import BookingPage from './Components/BookingPage.jsx'
 
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://localhost:4000'
 axios.defaults.withCredentials = true
 
 function App() {

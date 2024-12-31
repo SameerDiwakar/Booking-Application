@@ -27,7 +27,7 @@ const PlacesPage = () => {
                         <Link to={'/account/places/'+place._id}  key={place._id} className=" flex cursor-pointer gap-4 p-4 rounded-2xl bg-gray-100">
                             <div className=" flex bg-gray-300 ">
                                 {place.photos.length > 0 && (
-                                    <img className='object-cover aspect-square' src={'http://localhost:3000/uploads/'+place.photos[0]} alt="" />
+                                    <img className='object-cover aspect-square' src={'http://localhost:4000/uploads/'+place.photos[0]} alt="" />
                                 )}
                             </div>
                             <div className="grow-0 shrink">

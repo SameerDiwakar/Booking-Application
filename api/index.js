@@ -13,7 +13,7 @@ const multer  = require('multer')
 const Place = require('./models/place')
 const Booking = require('./models/booking')
 
-const port = 3000;
+const port = 4000;
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'ndwnd93er932rh02'
 const path = require('path');
@@ -24,7 +24,7 @@ app.use('/uploads',express.static(__dirname+'/uploads'))
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5174",
   })
 );
 
