@@ -1,14 +1,43 @@
-This project is a full-stack web application inspired by Airbnb, built using the MERN stack (MongoDB, Express.js, React.js, and Node.js). It enables users to explore and book accommodations while allowing hosts to list their properties for rent. The application is designed with a modern UI and robust backend for a seamless booking experience.
+# 🏨MERN Booking Application
 
-**Key Features**
-Property Listings: Hosts can list properties with images, descriptions, and pricing details.
-Search and Filters: Users can search properties by location, price, availability, and more.
-Booking System: Book stays with real-time availability checks and a smooth checkout process.
-User Authentication: Secure sign-up, login, and role-based access for hosts and guests.
-Responsive Design: Optimized for desktops, tablets, and mobile devices.
+A full-stack web application inspired by **Airbnb**, built using the **MERN stack** (MongoDB, Express.js, React.js, and Node.js). It allows users to explore and book accommodations while enabling hosts to list properties. Designed with a modern UI and robust backend for a seamless booking experience.
 
-**Tech Stack**
-Frontend: React.js (with React Router for navigation) with Tailwind CSS
-Backend: Node.js with Express.js
-Database: MongoDB for data storage
-Authentication: JWT-based secure authentication
+---
+
+## ✨ Key Features
+
+- 🏘️ **Property Listings**: Hosts can add listings with images, descriptions, and pricing.
+- 🔍 **Search & Filters**: Filter properties by location, price, dates, and availability.
+- 📅 **Booking System**: Real-time availability checks and smooth checkout flow.
+- 🔐 **User Authentication**: JWT-secured login/signup with role-based access (host/guest).
+- 📱 **Responsive Design**: Optimized for desktops, tablets, and mobile devices.
+
+---
+
+## 🛠️ Tech Stack
+
+- 🎨 **Frontend**: React.js + React Router + Tailwind CSS  
+- ⚙️ **Backend**: Node.js + Express.js  
+- 💾 **Database**: MongoDB  
+- 🔑 **Authentication**: JWT (JSON Web Token)
+
+---
+
+## 🚀 Getting Started
+
+Follow the steps below to run the project locally:
+
+### 📦 Backend (API Server)
+
+```bash
+cd api
+npm install
+node index.js
+```
+
+### 💻 Frontend (Client)
+```bash
+cd client
+npm install
+npm run dev
+```
